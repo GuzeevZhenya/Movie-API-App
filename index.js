@@ -1,22 +1,32 @@
 // const APIURL = 'https://api.themoviedb.org/3/';
 // const APIKEY = '04c35731a5ee918f014970082a0088b1';
-
-const APIURL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page1';
+let page;
+const APIURL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=${page}`;
 const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
 const SEARCHAPI = 'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=';
+const button = document.querySelector('.button-next');
 
+
+button.addEventListener('click', (e) => {
+    APIURL.page++;
+
+})
+getMovies(APIURL);
 
 const main = document.querySelector('#main');
 const form = document.querySelector('#form');
 const search = document.querySelector('#search');
 
-getMovies(APIURL);
+
 
 async function getMovies(url) {
     const resp = await fetch(url);
     const respData = await resp.json();
+    console.log(respData);
+    console.log(respData.page);
 
     showMovies(respData.results);
+
 }
 
 function showMovies(movies) {
@@ -33,7 +43,8 @@ function showMovies(movies) {
 						<h3>${title}</h3>
 						<span class="${getClassByRate(vote_average)}">${vote_average}</span>
 				</div>
-		</div>
+        </div>
+        
 		<div class="overview">
 		<h4>Overview:</h4>
 		${overview}
