@@ -16,9 +16,14 @@ header {
 }
 
 button {
-    width: 200px;
-    height: 100px;
     display: block;
+    margin: 0 10px;
+    width: 60px;
+    border-radius: 15px;
+    outline-style: none;
+    background-color: inherit;
+    color: white;
+
 }
 
 .search {

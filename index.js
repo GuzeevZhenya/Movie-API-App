@@ -1,29 +1,42 @@
 // const APIURL = 'https://api.themoviedb.org/3/';
 // const APIKEY = '04c35731a5ee918f014970082a0088b1';
-let page;
+let page = 1;
 const APIURL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=${page}`;
 const IMGPATH = 'https://image.tmdb.org/t/p/w1280';
 const SEARCHAPI = 'https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=';
-const button = document.querySelector('.button-next');
+const buttonNext = document.querySelector('.button-next');
+const buttonPrev = document.querySelector('.button-prev');
 
-
-button.addEventListener('click', (e) => {
-    APIURL.page++;
-
+buttonNext.addEventListener('click', (e) => {
+    ++page;
+    const APIURL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=${page}`;
+    getMovies(APIURL);
 })
+
+buttonPrev.addEventListener('click', (e) => {
+    page--;
+    const APIURL = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=${page}`;
+    getMovies(APIURL);
+})
+
+
 getMovies(APIURL);
 
 const main = document.querySelector('#main');
 const form = document.querySelector('#form');
 const search = document.querySelector('#search');
 
-
-
 async function getMovies(url) {
     const resp = await fetch(url);
     const respData = await resp.json();
     console.log(respData);
     console.log(respData.page);
+    if(respData.page ===1){
+        buttonPrev.style.display="none";
+    }
+    else{
+        buttonPrev.style.display="block";
+    }
 
     showMovies(respData.results);
 
