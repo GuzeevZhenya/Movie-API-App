@@ -73,8 +73,10 @@ function getClassByRate(vote) {
         return 'green';
     } else if (vote >= 5) {
         return 'orange';
-    } else {
+    } else if(vote ==0) {
         return 'red';
+    }else{
+        return "white"
     }
 }
 
