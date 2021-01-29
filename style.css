@@ -93,7 +93,7 @@ main {
 }
 
 .movie-info span.red {
-    color: rbg(189, 42, 42);
+    color: red;
 }
 
 .overview {
